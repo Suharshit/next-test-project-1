@@ -10,12 +10,12 @@ export const sendEmail = async({
     try {
         const hashedToken = await bcrypt.hash(userId.toString(), 10)
         if(emailType === "VERIFY"){
-          await User.findById(userId, {
+          await User.findByIdAndUpdate(userId, {
             verifyToken: hashedToken,
             verifyExpires: Date.now() + 3600000
           })
         } else if (emailType === "RESET"){
-          await User.findById(userId, {
+          await User.findByIdAndUpdate(userId, {
             forgotPasswordToken: hashedToken,
             forgotPasswordExpires: Date.now() + 3600000
           })
@@ -30,7 +30,7 @@ export const sendEmail = async({
         });
 
         const mailOptions = {
-          from: "suharshit123@gmial.com",
+          from: "suharshit123@gmail.com",
           to: email,
           subject: emailType === "VERIFY" ? "Verify  your email" : "Reset your password",
           text: "Please click on the following link to verify your email",

@@ -10,10 +10,10 @@ dbConnect()
 export async function POST(request: NextRequest){
     try {
         const reqBody = await request.json()
-        const { username, email, password }: any = reqBody
+        const { username, email, password } = reqBody
         // validation
         console.log(reqBody);
-        const user = await User.findOne({ email: email })
+        const user = await User.findOne({ email })
         if(user) {
             return NextResponse.json({ error: "User already exists" }, { status: 400})
         }
@@ -24,9 +24,7 @@ export async function POST(request: NextRequest){
             email, 
             password: hashedPassword 
         })
-        const savedUser = await newUser.save({
-            validateBeforeSave: true
-        })
+        const savedUser = await newUser.save()
         console.log(savedUser);
 
         // send Verification email
