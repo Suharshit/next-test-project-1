@@ -1,6 +1,5 @@
 import { dbConnect } from "@/dbConfig/dbConnect";
 import User from "@/modals/userModal";
-import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs"
 import { sendEmail } from "@/helpers/mailer";

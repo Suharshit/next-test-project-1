@@ -5,18 +5,16 @@ const userSchema = new Schema({
         type: String,
         required: [true, "Please provide a username"],
         unique: true,
-        lowercase: true,
-        trim: true
+        lowercase: true
     },
     email: {
         type: String,
-        required: [true, "Please provide a username"],
+        required: [true, "Please provide an email"],
         unique: true
     },
     password: {
         type: String,
-        required: [true, "Please provide a pasword"],
-        min: [8, "password must contain 8 charachters"]
+        required: [true, "Please provide a pasword"]
     },
     isVerified: {
         type: Boolean,
