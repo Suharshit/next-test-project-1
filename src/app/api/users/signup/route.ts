@@ -12,7 +12,7 @@ export async function POST(request: NextRequest){
         const { username, email, password } = reqBody
         // validation
         console.log(reqBody);
-        const user = await User.findOne({ email })
+        const user = await User.findOne({email})
         if(user) {
             return NextResponse.json({ error: "User already exists" }, { status: 400})
         }
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest){
         await sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
         return NextResponse.json({ 
             message: "User created successfully",
-            user: savedUser,
+            savedUser,
             success: true
         }, { status: 200})
     } catch (error: any) {
